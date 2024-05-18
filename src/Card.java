@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 public class Card {
     private String suit;
     private String value;
+    private int pointValue;
     private String imageFileName;
     private String backImageFileName;
     private boolean show;
@@ -15,9 +16,10 @@ public class Card {
     private Rectangle cardBox;
     private boolean highlight;
 
-    public Card(String suit, String value) {
+    public Card(String suit, String value, int pointValue) {
         this.suit = suit;
         this.value = value;
+        this.pointValue = pointValue;
         this.imageFileName = "images/card_"+suit+"_"+value+".png";
         this.show = true;
         this.backImageFileName = "images/card_back.png";
@@ -40,6 +42,10 @@ public class Card {
 
     public String getValue() {
         return value;
+    }
+
+    public int getPointValue() {
+        return pointValue;
     }
 
     public String getImageFileName() {
@@ -88,10 +94,11 @@ public class Card {
         ArrayList<Card> deck = new ArrayList<Card>();
         String[] suits = {"clubs", "diamonds", "hearts", "spades"};
         String[] values = {"02", "03", "04", "05", "06", "07", "08", "09", "10", "A", "J", "K", "Q"};
-        for (String s : suits) {
-            for (String v : values) {
-                Card c = new Card(s, v);
-                deck.add(c);
+        int[] pointValues = {2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 0, 0, 0};
+        for (int i = 0; i < values.length; i++) {
+            for (int j = 0; j < suits.length; j++) {
+                Card card = new Card(suits[j], values[i], pointValues[i]);
+                deck.add(card);
             }
         }
         return deck;
